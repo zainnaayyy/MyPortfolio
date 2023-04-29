@@ -7,8 +7,6 @@ import {
 } from "../../assets";
 import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
 import { ProjectCards } from "../../components";
-import "animate.css";
-import TrackVisibility from "react-on-screen";
 
 const Projects = () => {
   const projects = [
@@ -48,39 +46,16 @@ const Projects = () => {
       <Container>
         <Row>
           <Col>
-            <TrackVisibility>
-              {({ isVisible }) => (
-                <>
-                  <div
-                    className={
-                      isVisible
-                        ? "animate__animated animate__bounceInDown"
-                        : "animate__animated animate__bounceOutDown"
-                    }
-                  >
-                    <h2>Projects</h2>
-                  </div>
-                  <div
-                    className={
-                      isVisible
-                        ? "animate__animated animate__bounceInUp"
-                        : "animate__animated animate__bounceOutUp"
-                    }
-                  >
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
-                    </p>
-                  </div>
-                </>
-              )}
-            </TrackVisibility>
+            <h2>Projects</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
             <Tab.Container id="projects-tabs" defaultActiveKey="first">
               <Nav
                 variant="pills"
@@ -112,7 +87,7 @@ const Projects = () => {
           </Col>
         </Row>
       </Container>
-      <img className="background-image-right" src={ColorSharp2} />
+      <img className="background-image-right" src={ColorSharp2} alt="" />
     </section>
   );
 };

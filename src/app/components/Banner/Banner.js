@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { ArrowRightCircle } from "react-bootstrap-icons";
 import { HeaderImage } from "../../assets";
-import "animate.css";
-import TrackVisibility from "react-on-screen";
 import { HashLink } from "react-router-hash-link";
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -77,23 +75,11 @@ const Banner = () => {
                 effectively manage the entire software development life cycle
                 and exceed expectations in delivering results.
               </p>
-              <TrackVisibility>
-                {({ isVisible }) => (
-                  <div
-                    className={
-                      isVisible
-                        ? "animate__animated animate__rotateInUpLeft"
-                        : ""
-                    }
-                  >
-                    <HashLink className="hash" to="#connect">
-                      <button>
-                        Let’s Connect <ArrowRightCircle size={25} />
-                      </button>
-                    </HashLink>
-                  </div>
-                )}
-              </TrackVisibility>
+              <HashLink className="hash" to="#connect">
+                <button>
+                  Let’s Connect <ArrowRightCircle size={25} />
+                </button>
+              </HashLink>
             </Col>
             <Col xs={12} md={6} xl={5}>
               <img src={HeaderImage} alt="HeaderImage" />

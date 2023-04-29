@@ -6,6 +6,8 @@ import emailjs from "emailjs-com";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Form, Input } from "antd";
+import Swal from 'sweetalert2'
 
 const Contact = () => {
   const formInitialDetails = {
@@ -18,7 +20,6 @@ const Contact = () => {
 
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState("Send");
-  const [status, setStatus] = useState({});
 
   const onFormUpdate = (category, value) => {
     setFormDetails({
@@ -62,124 +63,184 @@ const Contact = () => {
   //       }));
   // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (values) => {
     setButtonText("Sending...");
     emailjs
-      .sendForm(
+      .send(
         "service_it0pfxs",
         "template_gi7wx7o",
-        e.target,
+        values,
         "tcGVS5tcyq9Y_07FA"
       )
       .then(
         (result) => {
           setButtonText("Send");
           setFormDetails(formInitialDetails);
-          setStatus({
-            success: true,
-            message: "Message sent successfully",
-          });
+          Swal.fire({
+            icon: 'success',
+            title: 'Mail sent successfully.',
+            text: 'Thanks for contacting.'
+          })
         },
         (error) => {
           setButtonText("Send");
-          setStatus({
-            success: false,
-            message: "Something went wrong, please try again later.",
-          });
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+          })
         }
       );
   };
 
+  const onFinishFailed = (errorInfo) => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Form is incomplete!'
+    })
+  };
+
   return (
     <Router>
-    <section className="contact" id="connect">
-      <Container>
-        <Row className="align-items-center">
-          <Col md={6}>
-            <img src={ContactImage} alt="Contact Me" />
-          </Col>
-          <Col md={6}>
-          <TrackVisibility>
+      <section className="contact" id="connect">
+        <Container>
+          <Row className="align-items-center">
+            <Col md={6}>
+              <img src={ContactImage} alt="Contact Me" />
+            </Col>
+            <Col md={6}>
+              <TrackVisibility>
                 {({ isVisible }) => (
                   <div
                     className={
-                      isVisible
-                        ? "animate__animated animate__shakeX"
-                        : ""
+                      isVisible ? "animate__animated animate__shakeX" : ""
                     }
                   >
-            <h2>Get In Touch</h2>
-            </div>
+                    <h2>Get In Touch</h2>
+                  </div>
                 )}
               </TrackVisibility>
-            <form onSubmit={handleSubmit}>
-              <Row>
-                <Col sm={6} className="px-1">
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formDetails.firstName}
-                    placeholder="First Name"
-                    onChange={(e) => onFormUpdate("firstName", e.target.value)}
-                  />
-                </Col>
-                <Col sm={6} className="px-1">
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formDetails.lastName}
-                    placeholder="Last Name"
-                    onChange={(e) => onFormUpdate("lastName", e.target.value)}
-                  />
-                </Col>
-                <Col sm={6} className="px-1">
-                  <input
-                    type="email"
-                    name="email"
-                    value={formDetails.email}
-                    placeholder="Email Address"
-                    onChange={(e) => onFormUpdate("email", e.target.value)}
-                  />
-                </Col>
-                <Col sm={6} className="px-1">
-                  <input
-                    type="phone"
-                    name="phone"
-                    value={formDetails.phone}
-                    placeholder="Phone No."
-                    onChange={(e) => onFormUpdate("phone", e.target.value)}
-                  />
-                </Col>
-                <Col sm={6} className="px-1">
-                  <textarea
-                    row="6"
-                    name="message"
-                    value={formDetails.message}
-                    placeholder="Message"
-                    onChange={(e) => onFormUpdate("message", e.target.value)}
-                  />
-                  <button type="submit">
-                    <span>{buttonText}</span>
-                  </button>
-                </Col>
-                {status.message && (
-                  <Col>
-                    <p
-                      className={
-                        status.success === false ? "danger" : "success"
-                      }
+              <Form
+                name="contactForm"
+                initialValues={{
+                  remember: true,
+                }}
+                onFinish={handleSubmit}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+              >
+                <Row>
+                  <Col sm={6} className="px-1">
+                    <Form.Item
+                      name="firstName"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your first name!",
+                        },
+                      ]}
                     >
-                      {status.message}
-                    </p>
+                      <Input 
+                      type="text"
+                      value={formDetails.firstName}
+                      placeholder="First Name"
+                      onChange={(e) =>
+                        onFormUpdate("firstName", e.target.value)
+                      }
+                      />
+                    </Form.Item>
                   </Col>
-                )}
-              </Row>
-            </form>
-          </Col>
-        </Row>
-      </Container>
-    </section>
+                  <Col sm={6} className="px-1">
+                  <Form.Item
+                      name="lastName"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your last name!",
+                        },
+                      ]}
+                    >
+                      <Input 
+                      type="text"
+                      value={formDetails.lastName}
+                      placeholder="Last Name"
+                      onChange={(e) =>
+                        onFormUpdate("lastName", e.target.value)
+                      }
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col sm={6} className="px-1">
+                  <Form.Item
+                      name="email"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your email!",
+                        },
+                      ]}
+                    >
+                      <Input 
+                      type="email"
+                      value={formDetails.email}
+                      placeholder="Email Address"
+                      onChange={(e) =>
+                        onFormUpdate("email", e.target.value)
+                      }
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col sm={6} className="px-1">
+                  <Form.Item
+                      name="phone"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your phone number!",
+                        },
+                      ]}
+                    >
+                      <Input 
+                      type="phone"
+                      value={formDetails.phone}
+                      placeholder="Phone No."
+                      onChange={(e) =>
+                        onFormUpdate("phone", e.target.value)
+                      }
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col sm={6} className="px-1">
+                  <Form.Item
+                      name="message"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your message!",
+                        },
+                      ]}
+                    >
+                      <Input.TextArea
+                      value={formDetails.message}
+                      placeholder="Message"
+                      onChange={(e) =>
+                        onFormUpdate("message", e.target.value)
+                      }
+                      />
+                    </Form.Item>
+                    <Form.Item>
+                      <button type="submit">
+                        <span>{buttonText}</span>
+                      </button>
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+      </section>
     </Router>
   );
 };

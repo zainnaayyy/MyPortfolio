@@ -2,12 +2,45 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Meter1, Meter2, Meter3, ColorSharp1 } from "../../assets";
-import "animate.css";
-import TrackVisibility from "react-on-screen";
+import { ColorSharp1 } from "../../assets";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Progress } from "antd";
 
 const Skills = () => {
+  const skills = [
+    {
+      name: "Web Development Technologies",
+      exp: 95,
+    },
+    {
+      name: "Web Frameworks",
+      exp: 85,
+    },
+    {
+      name: "Databases",
+      exp: 60,
+    },
+    {
+      name: "Version Control Tools",
+      exp: 70,
+    },
+    {
+      name: "Operating Systems",
+      exp: 80,
+    },
+    {
+      name: "Cloud Platforms",
+      exp: 75,
+    },
+    {
+      name: "Containerization Technologies",
+      exp: 50,
+    },
+    {
+      name: "CI/CD Tools",
+      exp: 65,
+    },
+  ];
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -34,45 +67,21 @@ const Skills = () => {
           <Row>
             <Col>
               <div className="skill-bx">
-                <TrackVisibility>
-                  {({ isVisible }) => (
-                    <>
-                      <div
-                        className={
-                          isVisible
-                            ? "animate__animated animate__lightSpeedInLeft"
-                            : "animate__animated animate__lightSpeedOutRight"
-                        }
-                      >
-                        <h2>Skills</h2>
-                      </div>
-                      <div
-                        className={
-                          isVisible
-                            ? "animate__animated animate__lightSpeedInRight animate__slow"
-                            : "animate__animated animate__lightSpeedOutLeft"
-                        }
-                      >
-                        <p>
-                          As an accomplished MERN DevOps Engineer, I possess a
-                          wide range of technical skills and expertise that
-                          allow me to create high-performing web applications.
-                          My mastery of front-end and back-end technologies like
-                          React, Node.js, and MongoDB, along with my
-                          comprehensive knowledge of cloud infrastructure,
-                          containerization technologies, CI/CD pipelines, and
-                          monitoring tools, enable me to manage the complete
-                          software development life cycle from inception to
-                          deployment. My commitment to delivering exceptional
-                          results that surpass client expectations and my
-                          ability to build and maintain robust and scalable web
-                          applications make me a valuable asset to any
-                          development team.
-                        </p>
-                      </div>
-                    </>
-                  )}
-                </TrackVisibility>
+                <h2>Skills</h2>
+                <p>
+                  As an accomplished MERN DevOps Engineer, I possess a wide
+                  range of technical skills and expertise that allow me to
+                  create high-performing web applications. My mastery of
+                  front-end and back-end technologies like React, Node.js, and
+                  MongoDB, along with my comprehensive knowledge of cloud
+                  infrastructure, containerization technologies, CI/CD
+                  pipelines, and monitoring tools, enable me to manage the
+                  complete software development life cycle from inception to
+                  deployment. My commitment to delivering exceptional results
+                  that surpass client expectations and my ability to build and
+                  maintain robust and scalable web applications make me a
+                  valuable asset to any development team.
+                </p>
                 <Carousel
                   responsive={responsive}
                   arrows={false}
@@ -82,38 +91,25 @@ const Skills = () => {
                   infinite={true}
                   className="skill-slider"
                 >
-                  <div className="item">
-                    <img src={Meter1} alt="" />
-                    <h5>Web Development Technologies</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Meter2} alt="" />
-                    <h5>Web Frameworks</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Meter3} alt="" />
-                    <h5>Databases</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Meter1} alt="" />
-                    <h5>Version Control Tools</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Meter2} alt="" />
-                    <h5>Operating Systems</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Meter3} alt="" />
-                    <h5>Cloud Platforms</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Meter1} alt="" />
-                    <h5>Containerization Technologies</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Meter2} alt="" />
-                    <h5>CI/CD Tools</h5>
-                  </div>
+                  {skills &&
+                    skills.map((skill, index) => {
+                      return (
+                        <div key={index} className="item">
+                          <Progress
+                            type="circle"
+                            size={100}
+                            strokeWidth={10}
+                            percent={skill.exp}
+                            trailColor="transparent"
+                            strokeColor={{
+                              "0%": "rgba(37,98,138,1)",
+                              "100%": "rgba(79,21,71,1)",
+                            }}
+                          />
+                          <h5>{skill.name}</h5>
+                        </div>
+                      );
+                    })}
                 </Carousel>
               </div>
             </Col>
