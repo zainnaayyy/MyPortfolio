@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Logo, NavIconBlack1, NavIconBlack2, NavIconBlack3 } from "../../assets";
+import { LogoWhite, NavIconWhite1, NavIconWhite2, NavIconWhite3 } from "../../assets";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { HashLink } from 'react-router-hash-link';
 import {
@@ -34,7 +34,7 @@ const NavBar = () => {
       <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
         <Container>
           <Navbar.Brand href="/">
-            <img src={Logo} alt="Logo" />
+            <img src={LogoWhite} alt="Logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav">
             <span className="navbar-toggler-icon"></span>
@@ -47,9 +47,9 @@ const NavBar = () => {
             </Nav>
             <span className="navbar-text">
               <div className="social-icon">
-                <a href="https://www.linkedin.com/in/muhammad-zain-abdullah-721181197/"><img src={ NavIconBlack1 } alt="LinkedIn" /></a>
-                <a href="https://www.facebook.com/obliviousbrat"><img src={ NavIconBlack2 } alt="Facebook" /></a>
-                <a href="https://www.instagram.com/obliviousbrat/"><img src={ NavIconBlack3 } alt="Instagram" /></a>
+                <a href="https://www.linkedin.com/in/muhammad-zain-abdullah-721181197/"><img src={ NavIconWhite1 } alt="LinkedIn" /></a>
+                <a href="https://www.facebook.com/obliviousbrat"><img src={ NavIconWhite2 } alt="Facebook" /></a>
+                <a href="https://www.instagram.com/obliviousbrat/"><img src={ NavIconWhite3 } alt="Instagram" /></a>
               </div>
               <HashLink to='#connect'>
                 <button className="vvd"><span>Let’s Connect</span></button>
