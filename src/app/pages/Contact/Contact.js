@@ -67,8 +67,8 @@ const Contact = () => {
     setButtonText("Sending...");
     emailjs
       .send(
-        "service_it0pfxs",
-        "template_gi7wx7o",
+        "service_vi1yiol",
+        "template_rh7i461",
         values,
         "tcGVS5tcyq9Y_07FA"
       )
